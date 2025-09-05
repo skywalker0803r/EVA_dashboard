@@ -132,17 +132,23 @@ h4 {
     50% { opacity: 0; }
 }
 
-/* 心跳圖容器樣式 */
+/* 波形圖容器樣式 (取代心跳圖) */
 .chart-panel {
     grid-column: 1 / 3; /* 佔據左側兩欄 */
     grid-row: 2 / 3;    /* 佔據第二行 */
     padding: 5px;
+    background-color: #000; /* From example */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* From example */
 }
-
-#heartbeat-chart {
+canvas#evaCanvas { /* Specific ID for the new canvas */
+    background-color: #000; /* From example */
+    border: 2px solid #00c6ff; /* From example */
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 100%; /* Make it responsive */
+    height: 100%; /* Make it responsive */
 }
 
 /* 右側資料面板容器 */
@@ -314,8 +320,7 @@ body {
 }
 
 .log-entry {
-    font-size: 0.9rem; /* 讓日誌文字稍大 */
-    margin-bottom: 5px; /* 增加日誌條目間的間距 */
+    margin-top: 5px; /* 增加日誌條目間的間距 */
 }
 
 /* 修正電力長條圖排版 */
@@ -531,3 +536,40 @@ body {
     font-weight: bold;
     color: #39ff14; /* Default green for ONLINE */
 }
+
+/* Circuit Diagram Panel Styles (Integrated from example/電路圖/index3.html) */
+.circuit-panel {
+    /* Inherits .panel styles */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.circuit-board {
+    position: relative;
+    width: 90%; /* Make it responsive */
+    height: 90%; /* Make it responsive */
+    border: 2px solid #00c6ff;
+    overflow: hidden; /* Hide overflowing nodes/lines */
+}
+
+.node {
+    position: absolute;
+    width: 15%; /* Responsive size */
+    height: 15%; /* Responsive size */
+    border: 2px solid #00c6ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    box-sizing: border-box;
+}
+
+.node.active {
+    background-color: #ff3366;
+    border-color: #ff3366;
+    color: #fff;
+}
+
+/* Lines will need dynamic positioning or simplified static lines */

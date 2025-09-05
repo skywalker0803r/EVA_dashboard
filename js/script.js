@@ -36,10 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- 初始化函式 ---
         init() {
             this.cacheDOMElements();
-            this.initChart();
-            // Wait for user interaction to start the main loop
-            this.elements.startOverlay.addEventListener('click', () => this.startSystem(), { once: true });
-        },
+                // Wait for user interaction to start the main loop
+                this.elements.startOverlay.addEventListener('click', () => this.startSystem(), { once: true });
+            },
 
         startSystem() {
             // Hide overlay
@@ -66,47 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
             this.elements.logMessages = document.getElementById('logMessages');
             this.elements.radarCircle = document.querySelector('.radar-circle');
             this.elements.warningOverlay = document.getElementById('angel-attack-warning');
-            this.elements.heartbeatCanvas = document.getElementById('heartbeat-chart');
+            this.elements.evaCanvas = document.getElementById('evaCanvas');
             this.elements.audioWarning = document.getElementById('audio-warning');
             this.elements.audioLogBeep = document.getElementById('audio-log-beep');
             this.elements.startOverlay = document.getElementById('start-overlay');
             this.elements.magiCasper = document.getElementById('magi-casper');
             this.elements.magiBalthasar = document.getElementById('magi-balthasar');
             this.elements.magiMelchior = document.getElementById('magi-melchior');
-        },
-
-        initChart() {
-            if (!this.elements.heartbeatCanvas) return;
-            const ctx = this.elements.heartbeatCanvas.getContext('2d');
-            this.state.chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: [],
-                    datasets: [{
-                        label: 'Heartbeat',
-                        data: [],
-                        borderColor: '#ffd700',
-                        borderWidth: 1,
-                        pointRadius: 0,
-                        tension: 0.2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: { display: false },
-                        y: { display: false, min: 0, max: 12 } // 調整Y軸讓波形置中
-                    },
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { enabled: false }
-                    },
-                    animation: {
-                        duration: 0 // 完全關閉動畫，追求效能
-                    }
-                }
-            });
         },
 
         // --- 更新模組 ---
@@ -127,30 +92,69 @@ document.addEventListener('DOMContentLoaded', () => {
             this.elements.powerBar.style.width = mainPower + '%';
         },
 
-        updateChart() {
-            if (!this.state.chart) return;
+        drawWaveform() {
+            if (!this.elements.evaCanvas) return;
+            const canvas = this.elements.evaCanvas;
+            const ctx = canvas.getContext('2d');
 
-            // 使用預設波形來產生數據
-            const pattern = this.config.heartbeatPattern;
-            const patternIndex = this.state.heartbeatPatternIndex;
-            const baseValue = pattern[patternIndex];
-            const dataPoint = baseValue + (Math.random() - 0.5) * 0.2; // 加入微小抖動
+            const width = canvas.width;
+            const height = canvas.height;
 
-            const data = this.state.chart.data.datasets[0].data;
-            const labels = this.state.chart.data.labels;
+            // 繪製網格
+            function drawGrid() {
+                ctx.strokeStyle = '#00c6ff';
+                ctx.lineWidth = 0.5;
 
-            data.push(dataPoint);
-            labels.push('');
+                // 橫線
+                for (let i = 0; i < height; i += 50) {
+                    ctx.beginPath();
+                    ctx.moveTo(0, i);
+                    ctx.lineTo(width, i);
+                    ctx.stroke();
+                }
 
-            if (data.length > this.config.CHART_MAX_DATA_POINTS) {
-                data.shift();
-                labels.shift();
+                // 豎線
+                for (let i = 0; i < width; i += 50) {
+                    ctx.beginPath();
+                    ctx.moveTo(i, 0);
+                    ctx.lineTo(i, height);
+                    ctx.stroke();
+                }
             }
-            
-            this.state.chart.update('none');
 
-            // 更新下一次的波形位置
-            this.state.heartbeatPatternIndex = (patternIndex + 1) % pattern.length;
+            // 繪製波形
+            function drawWaves() {
+                const waveHeight = 100;
+                const waveLength = 0.05;
+                const waveSpeed = 0.02;
+                const offset = 10;
+
+                // 藍色波形
+                ctx.strokeStyle = '#00c6ff';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(0, height / 2 - offset);
+                for (let x = 0; x < width; x++) {
+                    const y = height / 2 - offset + Math.sin(x * waveLength + Date.now() * waveSpeed) * waveHeight;
+                    ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+
+                // 粉色波形
+                ctx.strokeStyle = '#ff3366';
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(0, height / 2 + offset);
+                for (let x = 0; x < width; x++) {
+                    const y = height / 2 + offset + Math.cos(x * waveLength - Date.now() * waveSpeed) * waveHeight;
+                    ctx.lineTo(x, y);
+                }
+                ctx.stroke();
+            }
+
+            ctx.clearRect(0, 0, width, height);
+            drawGrid();
+            drawWaves();
         },
 
         updateLog() {
@@ -217,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mainLoop(timestamp) {
             if (timestamp - this.state.lastDataUpdate > this.config.DATA_UPDATE_INTERVAL) {
                 this.updateData();
-                this.updateChart();
+                this.drawWaveform(); // Call the new waveform drawing function
                 this.state.lastDataUpdate = timestamp;
             }
 

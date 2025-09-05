@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVA MAGI 系統</title>
+    <style>
+        body {
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            color: #fff;
+        }
+
+        .magi-container {
+            position: relative;
+            width: 900px;
+            height: 600px;
+        }
+
+        .magi-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            color: #00c6ff;
+            text-align: center;
+            z-index: 10;
+            text-shadow: 0 0 5px #00c6ff;
+            pointer-events: none;
+        }
+
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box {
+            fill: none;
+            stroke-width: 2;
+            transition: stroke 0.3s ease;
+        }
+
+        .box-balthasar {
+            stroke: #ff3366;
+        }
+
+        .box-casper {
+            stroke: #00c6ff;
+        }
+
+        .box-melchior {
+            stroke: #ff3366;
+        }
+
+        .box-text {
+            fill: #fff;
+            font-size: 24px;
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+
+        .box-subtext {
+            fill: #00c6ff;
+            font-size: 18px;
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+
+        .status-ok {
+            fill: #ff3366;
+        }
+    </style>
+</head>
+<body>
+    <div class="magi-container">
+        <div class="magi-title">MAGI</div>
+        <svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+            <path class="box box-balthasar" d="M100 200 L400 200 L400 450 L150 450 L100 400 Z" />
+            <text class="box-text" x="250" y="270">BALTHASAR-2</text>
+            <text class="box-subtext status-ok" x="250" y="300">LOGGING ON...</text>
+
+            <path class="box box-casper" d="M500 200 L800 200 L800 450 L550 450 L500 400 Z" />
+            <text class="box-text" x="650" y="270">CASPER-3</text>
+            <text class="box-subtext" x="650" y="300">CODE: 263</text>
+
+            <path class="box box-melchior" d="M300 100 L600 100 L600 350 L350 350 L300 300 Z" />
+            <text class="box-text" x="450" y="170">MELCHIOR-1</text>
+            <text class="box-subtext status-ok" x="450" y="200">STATUS: OK</text>
+
+            <path d="M400 450 L500 400 M300 300 L500 200" stroke="#00c6ff" stroke-width="2" fill="none" />
+
+            <path d="M150 450 L100 450 M550 450 L500 450 M350 350 L300 350 M600 350 L600 300 M400 200 L400 150 M800 200 L800 150" stroke="#ff3366" stroke-width="2" fill="none" />
+        </svg>
+    </div>
+</body>
+</html>

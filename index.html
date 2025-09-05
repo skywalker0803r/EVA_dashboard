@@ -18,8 +18,8 @@
         </div>
 
         <div class="panel chart-panel">
-            <h4>EVA-01 心跳</h4>
-            <canvas id="heartbeat-chart"></canvas>
+            <h4>EVA-01 波形</h4>
+            <canvas id="evaCanvas" width="800" height="600"></canvas>
         </div>
 
         <div class="data-panels">
@@ -34,12 +34,14 @@
                     <div class="power-bar"></div>
                 </div>
             </div>
-            <div class="panel weapons-panel">
-                <h4>WEAPONS</h4>
-                <ul>
-                    <li>武器A</li>
-                    <li>武器B</li>
-                </ul>
+            <div class="panel circuit-panel">
+                <h4>CIRCUIT DIAGRAM</h4>
+                <div class="circuit-board">
+                    <div class="node" style="top: 25%; left: 10%;">1</div>
+                    <div class="node" style="top: 25%; left: 50%;">2</div>
+                    <div class="node active" style="top: 75%; left: 50%;">3</div>
+                    <!-- Lines will be handled by CSS directly or simplified -->
+                </div>
             </div>
         </div>
 
