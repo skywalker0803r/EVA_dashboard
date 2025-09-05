@@ -1,0 +1,334 @@
+/* 基本樣式與字體 */
+body {
+    background-color: #000;
+    color: #39ff14; /* 螢光綠 */
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    overflow: hidden; /* 防止滾動條出現 */
+    position: relative;
+    /* 螢幕掃描線效果 */
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        #000 0,
+        rgba(255, 255, 255, 0.05) 1px,
+        rgba(0, 0, 0, 0.3) 2px
+    );
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 999;
+}
+
+/* 儀表板容器 */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 0.6fr;
+    gap: 10px;
+    padding: 10px;
+    height: 100vh;
+}
+
+/* 面板通用樣式 */
+.panel {
+    border: 1px solid #39ff14;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+    position: relative;
+}
+
+/* 核心數據區樣式 */
+.main-display {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 2px solid #39ff14;
+}
+
+/* 色差效果 */
+h4, .sync-rate {
+    color: #39ff14;
+    text-shadow:
+        -1px 0px 2px #ff00de,
+        1px 0px 2px #00ff66;
+}
+
+/* 核心數據 */
+.sync-rate {
+    font-size: 8rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.eva-status {
+    margin-top: 20px;
+}
+
+.status-text {
+    font-weight: bold;
+}
+
+.active { color: #39ff14; }
+.standby { color: #888; }
+
+/* 呼吸燈樣式 */
+.breathing-light {
+    width: 12px;
+    height: 12px;
+    background-color: #00ff66;
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    box-shadow: 0 0 5px #00ff66;
+    animation: breathe 2s infinite alternate;
+}
+
+@keyframes breathe {
+    0% { opacity: 0.4; box-shadow: 0 0 5px #00ff66; }
+    50% { opacity: 1; box-shadow: 0 0 15px #00ff66; }
+    100% { opacity: 0.4; box-shadow: 0 0 5px #00ff66; }
+}
+
+/* 警報狀態的樣式 */
+.warning {
+    color: #ff0000;
+    animation: blink 0.5s infinite;
+}
+
+/* 警報閃爍動畫 */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* 心跳圖容器樣式 */
+#heartbeat-chart {
+    width: 90%;
+    height: 150px;
+    margin-top: 20px;
+}
+
+/* 右側資料面板容器 */
+.data-panels {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+/* 雷達區樣式 */
+.radar-map-panel {
+    grid-column: 3 / 4;
+    grid-row: 1 / 2; /* 騰出空間給下方的資料面板 */
+    border: 1px solid #39ff14;
+    padding: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.radar-circle {
+    width: 80%;
+    padding-bottom: 80%;
+    border-radius: 50%;
+    border: 1px solid #39ff14;
+    position: relative;
+    overflow: hidden;
+}
+
+.radar-scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(57, 255, 20, 0) 50%,
+        rgba(57, 255, 20, 0.4) 100%
+    );
+    animation: scan 2s linear infinite;
+    transform-origin: 50% 50%;
+}
+
+@keyframes scan {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.target {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #ff0000;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff0000;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* 系統日誌區樣式 */
+.log-panel {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
+    border: 1px solid #39ff14;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.log-messages {
+    height: calc(100% - 20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 0.8rem;
+    line-height: 1.2;
+}
+
+.log-entry {
+    margin-top: 5px;
+    animation: fade-in 0.5s ease-out;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 電力長條圖樣式 */
+.power-bar-container {
+    border: 1px solid #39ff14;
+    height: 20px;
+    margin-top: 10px;
+}
+
+.power-bar {
+    height: 100%;
+    background-color: #39ff14;
+    width: 0%; /* 初始值為0，由 JS 控制 */
+    transition: width 0.5s ease;
+}
+
+/* 調整整體字體大小 */
+body {
+    font-size: 1rem; /* 增加基礎字體大小 */
+}
+
+/* 讓最重要的資訊更顯眼 */
+.sync-rate {
+    font-size: 12rem; /* 讓同步率數字更大 */
+    line-height: 1; /* 調整行高，讓數字更緊湊 */
+}
+
+/* 調整核心數據面板的排版 */
+.main-display {
+    justify-content: space-around; /* 平均分佈內容 */
+    align-items: flex-start; /* 內容靠上對齊 */
+    padding-top: 5rem; /* 增加頂部間距 */
+}
+
+.eva-status {
+    margin-top: 5rem; /* 增加狀態文字與上方區塊的間距 */
+}
+
+/* 調整右側面板的字體與排版 */
+.panel h4 {
+    font-size: 1.2rem; /* 面板標題稍大 */
+    margin-bottom: 0.8rem; /* 增加標題與內容的間距 */
+}
+
+.panel .value {
+    font-size: 1.5rem; /* 核心溫度等數值增大 */
+}
+
+.panel ul {
+    list-style: none; /* 移除列表項目符號 */
+    padding: 0;
+}
+
+.panel li {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* 調整系統日誌區的排版與字體 */
+.log-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* 讓內容從頂部開始 */
+}
+
+.log-messages {
+    flex-grow: 1; /* 讓日誌區塊填滿剩餘空間 */
+    justify-content: flex-start; /* 日誌從頂部開始出現 */
+}
+
+.log-entry {
+    font-size: 0.9rem; /* 讓日誌文字稍大 */
+    margin-bottom: 5px; /* 增加日誌條目間的間距 */
+}
+
+/* 修正電力長條圖排版 */
+.power-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* 使徒來襲警告樣式 */
+.angel-warning-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    color: #ff0000;
+    text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000;
+    animation: fadeInOut 3s ease-in-out;
+    pointer-events: none; /* 讓滑鼠可以穿透 */
+}
+
+.angel-warning-text {
+    font-size: 15rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.angel-warning-subtext {
+    font-size: 5rem;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    20%, 80% { opacity: 1; }
+}

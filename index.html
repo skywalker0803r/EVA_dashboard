@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVA 戰情室儀表板</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="main-display">
+            <div class="sync-rate">00.00%</div>
+            <canvas id="heartbeat-chart"></canvas>
+            <div class="eva-status">
+                <p>EVA-01: <span class="status-text active">ACTIVE</span></p>
+                <p>EVA-02: <span class="status-text standby">STANDBY</span></p>
+            </div>
+        </div>
+
+        <div class="data-panels">
+            <div class="panel temp-panel">
+                <h4>CORE TEMP</h4>
+                <div class="value">XX.X°C</div>
+                <div class="breathing-light"></div>
+            </div>
+            <div class="panel power-panel">
+                <h4>POWER</h4>
+                <div class="power-bar-container">
+                    <div class="power-bar"></div>
+                </div>
+            </div>
+            <div class="panel weapons-panel">
+                <h4>WEAPONS</h4>
+                <ul>
+                    <li>武器A</li>
+                    <li>武器B</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="radar-map-panel">
+            <h4>RADAR</h4>
+            <div class="radar-circle">
+                <div class="radar-scanline"></div>
+                </div>
+        </div>
+
+        <div class="log-panel">
+            <h4>SYSTEM LOG</h4>
+            <div class="log-messages" id="logMessages">
+                </div>
+        </div>
+    </div>
+
+    <div id="angel-attack-warning" class="angel-warning-overlay" style="display: none;">
+        <div class="angel-warning-text">警告</div>
+        <div class="angel-warning-subtext">使徒來襲</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
