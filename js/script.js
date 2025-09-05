@@ -203,13 +203,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const randomStatus = () => statuses[Math.floor(Math.random() * statuses.length)];
 
             if (this.elements.magiCasper) {
-                this.elements.magiCasper.textContent = `CASPER: ${randomStatus()}`;
+                this.elements.magiCasper.textContent = randomStatus();
             }
             if (this.elements.magiBalthasar) {
-                this.elements.magiBalthasar.textContent = `BALTHASAR: ${randomStatus()}`;
+                this.elements.magiBalthasar.textContent = randomStatus();
             }
             if (this.elements.magiMelchior) {
-                this.elements.magiMelchior.textContent = `MELCHIOR: ${randomStatus()}`;
+                this.elements.magiMelchior.textContent = randomStatus();
             }
         },
 

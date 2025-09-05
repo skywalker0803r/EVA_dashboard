@@ -465,3 +465,69 @@ body {
     margin-bottom: 5px;
     color: #39ff14; /* Default to green */
 }
+
+/* MAGI System Panel Specific Styles (Integrated from example/MAGI系統介面/index2.html) */
+.magi-panel {
+    display: flex;
+    flex-direction: column;
+    /* The panel itself is already styled by .panel */
+    /* Ensure content fills the panel */
+    height: 100%;
+    box-sizing: border-box; /* Include padding in height */
+}
+
+.magi-panel h4 {
+    color: #00c6ff; /* Header color from example */
+    font-size: 1.5rem; /* Adjusted size */
+    border-bottom: 1px solid #00c6ff; /* Border from example */
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 100%; /* Ensure border spans full width */
+}
+
+.magi-panel-columns {
+    display: flex;
+    justify-content: space-between;
+    flex: 1; /* Takes remaining vertical space */
+    width: 100%; /* Takes full horizontal space */
+    gap: 5px; /* Small gap between columns */
+}
+
+.panel-column {
+    width: 33%; /* Distribute width evenly */
+    border: 2px solid #ff3366; /* Balthasar color */
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-sizing: border-box; /* Include padding in width */
+    text-align: center;
+}
+
+.panel-column:nth-child(2) {
+    border-color: #00c6ff;
+}
+
+.panel-column:nth-child(3) {
+    border-color: #ff3366; /* Keeping red for Melchior as default */
+}
+
+.panel-title {
+    font-size: 1rem; /* Adjusted size */
+    color: #ff3366; /* Balthasar title color */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.panel-column:nth-child(2) .panel-title {
+    color: #00c6ff;
+}
+
+.panel-info {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #39ff14; /* Default green for ONLINE */
+}

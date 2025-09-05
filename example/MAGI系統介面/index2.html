@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVA 儀表板 - MAGI</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .container {
+            width: 800px;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #fff;
+            padding: 10px;
+        }
+
+        .header {
+            color: #00c6ff;
+            font-size: 32px;
+            border-bottom: 2px solid #00c6ff;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+
+        .magi-panel {
+            display: flex;
+            justify-content: space-between;
+            flex: 1;
+        }
+
+        .panel-column {
+            width: 30%;
+            border: 2px solid #ff3366;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .panel-column:nth-child(2) {
+            border-color: #00c6ff;
+        }
+
+        .panel-title {
+            font-size: 24px;
+            color: #ff3366;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">MAGI SYSTEM</div>
+        <div class="magi-panel">
+            <div class="panel-column">
+                <div class="panel-title">BALTHASAR-2</div>
+                <div class="panel-info">LOGGING ON...</div>
+            </div>
+            <div class="panel-column">
+                <div class="panel-title">CASPER-3</div>
+                <div class="panel-info">CODE: 263</div>
+            </div>
+            <div class="panel-column">
+                <div class="panel-title">MELCHIOR-1</div>
+                <div class="panel-info">STATUS: OK</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
