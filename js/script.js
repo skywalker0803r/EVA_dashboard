@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
             LOG_INTERVAL: 1500, // ms
             RADAR_INTERVAL: 5000, // ms
             CHART_MAX_DATA_POINTS: 50,
+            heartbeatPattern: [5, 5, 5, 5.5, 5, 4.8, 10, 4, 5, 6, 5, 5], // 心跳波形
             logMessages: [
                 "EVA-01 SYNCHRONIZATION RATE STABLE.",
                 "A.T. FIELD ACTIVATED.",
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lastLogUpdate: 0,
             lastRadarUpdate: 0,
             lastDataUpdate: 0,
+            heartbeatPatternIndex: 0,
         },
 
         // --- 初始化函式 ---
@@ -68,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     maintainAspectRatio: false,
                     scales: {
                         x: { display: false },
-                        y: { display: false, min: 0, max: 10 }
+                        y: { display: false, min: 0, max: 12 } // 調整Y軸讓波形置中
                     },
                     plugins: {
                         legend: { display: false },
@@ -102,7 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
         updateChart() {
             if (!this.state.chart) return;
 
-            const dataPoint = Math.random() * 2 + 1 + (Math.random() > 0.8 ? Math.random() * 5 : 0);
+            // 使用預設波形來產生數據
+            const pattern = this.config.heartbeatPattern;
+            const patternIndex = this.state.heartbeatPatternIndex;
+            const baseValue = pattern[patternIndex];
+            const dataPoint = baseValue + (Math.random() - 0.5) * 0.2; // 加入微小抖動
+
             const data = this.state.chart.data.datasets[0].data;
             const labels = this.state.chart.data.labels;
 
@@ -113,7 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 data.shift();
                 labels.shift();
             }
+            
             this.state.chart.update('none');
+
+            // 更新下一次的波形位置
+            this.state.heartbeatPatternIndex = (patternIndex + 1) % pattern.length;
         },
 
         updateLog() {
