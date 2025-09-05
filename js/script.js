@@ -92,7 +92,7 @@ const heartbeatChart = new Chart(heartbeatCanvas, {
         datasets: [{
             label: 'Heartbeat',
             data: [],
-            borderColor: '#39ff14',
+            borderColor: '#ffd700',
             borderWidth: 2,
             pointRadius: 0,
             fill: false,

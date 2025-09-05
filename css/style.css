@@ -7,7 +7,7 @@ html, body {
 /* 基本樣式與字體 */
 body {
     background-color: #000;
-    color: #39ff14; /* 螢光綠 */
+    color: #ffd700; /* 黃色 */
     font-family: 'Courier New', Courier, monospace;
     overflow: hidden; /* 防止滾動條出現 */
     position: relative;
@@ -69,10 +69,8 @@ body::after {
 
 /* 色差效果 */
 h4 {
-    color: #39ff14;
-    text-shadow:
-        -1px 0px 2px #ff00de,
-        1px 0px 2px #00ff66;
+    color: #ffd700;
+    text-shadow: 0 0 5px #ffd700;
 }
 
 .sync-rate {
@@ -101,7 +99,7 @@ h4 {
     font-weight: bold;
 }
 
-.active { color: #39ff14; }
+.active { color: #ffd700; }
 .standby { color: #888; }
 
 /* 呼吸燈樣式 */
