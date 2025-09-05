@@ -36,6 +36,25 @@ document.addEventListener('DOMContentLoaded', () => {
         init() {
             this.cacheDOMElements();
             this.initChart();
+            // Wait for user interaction to start the main loop
+            this.elements.startOverlay.addEventListener('click', () => this.startSystem(), { once: true });
+        },
+
+        startSystem() {
+            // Hide overlay
+            this.elements.startOverlay.style.display = 'none';
+
+            // Unlock audio context by playing and pausing a sound
+            if (this.elements.audioWarning) {
+                this.elements.audioWarning.play().catch(() => {});
+                this.elements.audioWarning.pause();
+            }
+            if (this.elements.audioLogBeep) {
+                this.elements.audioLogBeep.play().catch(() => {});
+                this.elements.audioLogBeep.pause();
+            }
+
+            // Start the main loop
             requestAnimationFrame(this.mainLoop.bind(this));
         },
 
@@ -47,6 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
             this.elements.radarCircle = document.querySelector('.radar-circle');
             this.elements.warningOverlay = document.getElementById('angel-attack-warning');
             this.elements.heartbeatCanvas = document.getElementById('heartbeat-chart');
+            this.elements.audioWarning = document.getElementById('audio-warning');
+            this.elements.audioLogBeep = document.getElementById('audio-log-beep');
+            this.elements.startOverlay = document.getElementById('start-overlay');
         },
 
         initChart() {
@@ -128,6 +150,10 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         updateLog() {
+            if (this.elements.audioLogBeep) {
+                this.elements.audioLogBeep.currentTime = 0;
+                this.elements.audioLogBeep.play().catch(() => {});
+            }
             const message = this.config.logMessages[Math.floor(Math.random() * this.config.logMessages.length)];
             const newLogEntry = document.createElement('div');
             newLogEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
@@ -146,6 +172,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const numTargets = Math.floor(Math.random() * 4); // 先決定紅點數量
 
             if (numTargets > 0) { // 如果有紅點，則觸發警告並生成紅點
+                if (this.elements.audioWarning) {
+                    this.elements.audioWarning.currentTime = 0;
+                    this.elements.audioWarning.play().catch(() => {});
+                }
                 this.updateLog("WARNING: ANGEL SIGNATURE DETECTED!");
                 this.elements.warningOverlay.classList.add('visible');
                 setTimeout(() => {

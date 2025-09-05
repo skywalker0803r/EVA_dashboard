@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div id="start-overlay">
+        <div class="start-text">CLICK TO INITIALIZE</div>
+    </div>
     <div class="dashboard-container">
         <div class="main-display">
             <h4>同步率</h4>
@@ -58,6 +61,10 @@
         <div class="angel-warning-text">警告</div>
         <div class="angel-warning-subtext">使徒來襲</div>
     </div>
+
+    <!-- 音效元素 -->
+    <audio id="audio-warning" src="audio/alarm.wav" preload="auto"></audio>
+    <audio id="audio-log-beep" src="audio/beep.wav" preload="auto"></audio>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="js/script.js"></script>
