@@ -1,9 +1,14 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 /* 基本樣式與字體 */
 body {
     background-color: #000;
     color: #39ff14; /* 螢光綠 */
     font-family: 'Courier New', Courier, monospace;
-    margin: 0;
     overflow: hidden; /* 防止滾動條出現 */
     position: relative;
     /* 螢幕掃描線效果 */
@@ -33,7 +38,13 @@ body::after {
     grid-template-rows: 1fr 1fr 0.6fr;
     gap: 10px;
     padding: 10px;
-    height: 100vh;
+    height: 100%; /* 改為百分比高度 */
+    box-sizing: border-box; /* 確保 padding 不會導致溢出 */
+}
+
+/* 防止grid項目因內容過大而撐開佈局 */
+.dashboard-container > * {
+    min-height: 0;
 }
 
 /* 面板通用樣式 */
@@ -47,7 +58,7 @@ body::after {
 /* 核心數據區樣式 */
 .main-display {
     grid-column: 1 / 3;
-    grid-row: 1 / 3;
+    grid-row: 1 / 2; /* 縮短高度，只佔第一行 */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -62,6 +73,11 @@ h4, .sync-rate {
     text-shadow:
         -1px 0px 2px #ff00de,
         1px 0px 2px #00ff66;
+}
+
+.main-display h4 {
+    color: #ffd700;
+    text-shadow: 0 0 5px #ffd700;
 }
 
 /* 核心數據 */
@@ -114,10 +130,14 @@ h4, .sync-rate {
 }
 
 /* 心跳圖容器樣式 */
+.chart-panel {
+    grid-column: 1 / 3; /* 佔據左側兩欄 */
+    grid-row: 2 / 3;    /* 佔據第二行 */
+    padding: 5px;
+}
+
 #heartbeat-chart {
-    width: 90%;
-    height: 150px;
-    margin-top: 20px;
+    /* Chart.js 會自動調整大小以填滿容器 */
 }
 
 /* 右側資料面板容器 */

@@ -9,12 +9,16 @@
 <body>
     <div class="dashboard-container">
         <div class="main-display">
+            <h4>同步率</h4>
             <div class="sync-rate">00.00%</div>
-            <canvas id="heartbeat-chart"></canvas>
             <div class="eva-status">
                 <p>EVA-01: <span class="status-text active">ACTIVE</span></p>
                 <p>EVA-02: <span class="status-text standby">STANDBY</span></p>
             </div>
+        </div>
+
+        <div class="panel chart-panel">
+            <canvas id="heartbeat-chart"></canvas>
         </div>
 
         <div class="data-panels">
