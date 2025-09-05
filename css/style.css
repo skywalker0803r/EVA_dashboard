@@ -367,6 +367,10 @@ body {
 
 /* RWD for mobile devices */
 @media (max-width: 768px) {
+    body {
+        overflow: auto; /* 允許在手機上滾動 */
+    }
+
     .dashboard-container {
         grid-template-columns: 1fr;
         grid-template-rows: auto;
