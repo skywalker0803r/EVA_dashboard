@@ -428,8 +428,7 @@ body {
     }
 
     .data-panels .panel {
-        flex-basis: calc(50% - 5px); /* Two panels per row */
-        min-height: 120px;
+        flex-basis: 100%; /* Each panel takes full width */
     }
     
     .radar-map-panel {
