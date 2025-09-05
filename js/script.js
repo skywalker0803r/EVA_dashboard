@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
             DATA_UPDATE_INTERVAL: 100, // ms
             LOG_INTERVAL: 1500, // ms
             RADAR_INTERVAL: 5000, // ms
+            MAGI_UPDATE_INTERVAL: 3000, // ms
             CHART_MAX_DATA_POINTS: 50,
             heartbeatPattern: [5, 5, 5, 5.5, 5, 4.8, 10, 4, 5, 6, 5, 5], // 心跳波形
             logMessages: [
@@ -69,6 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
             this.elements.audioWarning = document.getElementById('audio-warning');
             this.elements.audioLogBeep = document.getElementById('audio-log-beep');
             this.elements.startOverlay = document.getElementById('start-overlay');
+            this.elements.magiCasper = document.getElementById('magi-casper');
+            this.elements.magiBalthasar = document.getElementById('magi-balthasar');
+            this.elements.magiMelchior = document.getElementById('magi-melchior');
         },
 
         initChart() {
@@ -194,6 +198,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         },
 
+        updateMagiStatus() {
+            const statuses = ['ONLINE', 'OFFLINE', 'ERROR'];
+            const randomStatus = () => statuses[Math.floor(Math.random() * statuses.length)];
+
+            if (this.elements.magiCasper) {
+                this.elements.magiCasper.textContent = `CASPER: ${randomStatus()}`;
+            }
+            if (this.elements.magiBalthasar) {
+                this.elements.magiBalthasar.textContent = `BALTHASAR: ${randomStatus()}`;
+            }
+            if (this.elements.magiMelchior) {
+                this.elements.magiMelchior.textContent = `MELCHIOR: ${randomStatus()}`;
+            }
+        },
+
         // --- 主迴圈 ---
         mainLoop(timestamp) {
             if (timestamp - this.state.lastDataUpdate > this.config.DATA_UPDATE_INTERVAL) {
@@ -210,6 +229,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (timestamp - this.state.lastRadarUpdate > this.config.RADAR_INTERVAL) {
                 this.updateRadar();
                 this.state.lastRadarUpdate = timestamp;
+            }
+
+            // Update MAGI status less frequently
+            if (timestamp - this.state.lastMagiUpdate > this.config.MAGI_UPDATE_INTERVAL) {
+                this.updateMagiStatus();
+                this.state.lastMagiUpdate = timestamp;
             }
 
             requestAnimationFrame(this.mainLoop.bind(this));

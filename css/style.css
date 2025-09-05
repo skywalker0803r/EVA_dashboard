@@ -127,7 +127,6 @@ h4 {
     animation: blink 0.5s infinite;
 }
 
-/* 警報閃爍動畫 */
 @keyframes blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
@@ -451,4 +450,18 @@ body {
     .angel-warning-subtext {
         font-size: 3rem;
     }
+}
+
+/* MAGI System Panel Specific Styles */
+.magi-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    font-size: 0.9rem;
+}
+
+.magi-status {
+    margin-bottom: 5px;
+    color: #39ff14; /* Default to green */
 }
