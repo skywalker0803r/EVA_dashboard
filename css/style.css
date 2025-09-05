@@ -341,8 +341,13 @@ body {
     z-index: 1000;
     color: #ff0000;
     text-shadow: 0 0 20px #ff0000, 0 0 30px #ff0000;
-    animation: fadeInOut 3s ease-in-out;
+    opacity: 0;
     pointer-events: none; /* 讓滑鼠可以穿透 */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.angel-warning-overlay.visible {
+    opacity: 1;
 }
 
 .angel-warning-text {
