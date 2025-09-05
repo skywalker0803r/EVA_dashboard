@@ -49,22 +49,29 @@ body::after {
 
 /* 面板通用樣式 */
 .panel {
-    border: 1px solid #39ff14;
+    border: 2px solid #39ff14; /* Thicker border */
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.6); /* Subtle glow */
     padding: 15px;
-    background-color: rgba(0, 0, 0, 0.5); /* 半透明背景 */
+    background-color: rgba(0, 0, 0, 0.6); /* Slightly more opaque */
     position: relative;
 }
 
 /* 核心數據區樣式 */
 .main-display {
     grid-column: 1 / 3;
-    grid-row: 1 / 2; /* 縮短高度，只佔第一行 */
+    grid-row: 1 / 2;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    border: 2px solid #39ff14;
+    border: 3px solid #00c6ff; /* Thicker blue border */
+    box-shadow: 0 0 15px rgba(0, 198, 255, 0.7); /* Blue glow */
+    background:
+        linear-gradient(45deg, rgba(0, 198, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(0, 198, 255, 0.05) 75%, rgba(0, 198, 255, 0.05) 100%),
+        linear-gradient(-45deg, rgba(0, 198, 255, 0.05) 25%, transparent 25%, transparent 75%, rgba(0, 198, 255, 0.05) 75%, rgba(0, 198, 255, 0.05) 100%);
+    background-size: 40px 40px; /* Adjust pattern size */
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background */
 }
 
 /* 色差效果 */
@@ -75,7 +82,8 @@ h4 {
 
 .sync-rate {
     color: #ffd700; /* 將同步率數據改為黃色 */
-    text-shadow: 0 0 10px #ffd700; /* 同步率數據的黃色光暈 */
+    text-shadow: 0 0 20px #ffd700, 0 0 30px #ffd700, 0 0 40px rgba(255, 215, 0, 0.5); /* More intense glow */
+    animation: flicker 1.5s infinite alternate; /* Add flicker animation */
 }
 
 .main-display h4 {
@@ -104,15 +112,15 @@ h4 {
 
 /* 呼吸燈樣式 */
 .breathing-light {
-    width: 12px;
-    height: 12px;
+    width: 15px; /* Slightly larger */
+    height: 15px; /* Slightly larger */
     background-color: #00ff66;
     border-radius: 50%;
     position: absolute;
     top: 15px;
     right: 15px;
-    box-shadow: 0 0 5px #00ff66;
-    animation: breathe 2s infinite alternate;
+    box-shadow: 0 0 10px #00ff66, 0 0 20px rgba(0, 255, 102, 0.5); /* More intense glow */
+    animation: breathe 1.8s infinite alternate; /* Slightly faster breathe */
 }
 
 @keyframes breathe {
@@ -132,16 +140,23 @@ h4 {
     50% { opacity: 0; }
 }
 
+@keyframes flicker {
+    0%, 100% { opacity: 1; text-shadow: 0 0 20px #ffd700, 0 0 30px #ffd700, 0 0 40px rgba(255, 215, 0, 0.5); }
+    50% { opacity: 0.9; text-shadow: 0 0 15px #ffd700, 0 0 25px #ffd700, 0 0 35px rgba(255, 215, 0, 0.3); }
+}
+
 /* 波形圖容器樣式 (取代心跳圖) */
 .chart-panel {
-    grid-column: 1 / 3; /* 佔據左側兩欄 */
-    grid-row: 2 / 3;    /* 佔據第二行 */
+    grid-column: 1 / 3;
+    grid-row: 2 / 3;
     padding: 5px;
-    background-color: #000; /* From example */
+    background-color: rgba(0, 0, 0, 0.7); /* Darker background */
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* From example */
+    overflow: hidden;
+    border: 3px solid #ff3366; /* Thicker red border */
+    box-shadow: 0 0 15px rgba(255, 51, 102, 0.7); /* Red glow */
 }
 canvas#evaCanvas { /* Specific ID for the new canvas */
     background-color: #000; /* From example */
@@ -149,6 +164,10 @@ canvas#evaCanvas { /* Specific ID for the new canvas */
     display: block;
     width: 100%; /* Make it responsive */
     height: 100%; /* Make it responsive */
+    background-image:
+        linear-gradient(to right, rgba(0, 198, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 198, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px; /* Adjust grid size as needed */
 }
 
 /* 右側資料面板容器 */
@@ -160,27 +179,39 @@ canvas#evaCanvas { /* Specific ID for the new canvas */
     justify-content: space-around;
 }
 
+.temp-panel {
+    border: 2px solid #39ff14; /* Green border */
+    box-shadow: 0 0 10px rgba(57, 255, 20, 0.7); /* Green glow */
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
 /* 雷達區樣式 */
 .radar-map-panel {
     grid-column: 3 / 4;
-    grid-row: 1 / 2; /* 騰出空間給下方的資料面板 */
-    border: 1px solid #39ff14;
+    grid-row: 1 / 2;
+    border: 2px solid #00c6ff; /* Change border color to blue, thicker */
+    box-shadow: 0 0 10px rgba(0, 198, 255, 0.7); /* Blue glow */
     padding: 15px;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: radial-gradient(circle at center, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.9) 100%); /* Subtle radial gradient */
 }
 
 .radar-circle {
-    height: 80%; /* 根據高度計算尺寸 */
-    aspect-ratio: 1 / 1; /* 保持 1:1 的長寬比 */
+    height: 80%;
+    aspect-ratio: 1 / 1;
     width: auto;
     border-radius: 50%;
-    border: 1px solid #39ff14;
+    border: 2px solid #00c6ff; /* Thicker blue border */
+    box-shadow: 0 0 15px rgba(0, 198, 255, 0.8); /* More intense blue glow */
     position: relative;
     overflow: hidden;
+    background:
+        repeating-conic-gradient(from 0deg, rgba(0, 198, 255, 0.1) 0deg 10deg, transparent 10deg 20deg), /* Radial grid lines */
+        repeating-radial-gradient(circle at center, transparent 0 10%, rgba(0, 198, 255, 0.1) 10% 11%, transparent 11% 20%); /* Concentric circles */
 }
 
 .radar-scanline {
@@ -227,9 +258,11 @@ canvas#evaCanvas { /* Specific ID for the new canvas */
 .log-panel {
     grid-column: 1 / 3;
     grid-row: 3 / 4;
-    border: 1px solid #39ff14;
+    border: 3px solid #ffd700; /* Thicker yellow border */
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.7); /* Yellow glow */
     padding: 15px;
     overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .log-messages {
@@ -244,6 +277,7 @@ canvas#evaCanvas { /* Specific ID for the new canvas */
 .log-entry {
     margin-top: 5px;
     animation: fade-in 0.5s ease-out;
+    text-shadow: 0 0 3px rgba(255, 215, 0, 0.5); /* Subtle yellow text shadow */
 }
 
 @keyframes fade-in {
@@ -260,9 +294,10 @@ canvas#evaCanvas { /* Specific ID for the new canvas */
 
 .power-bar {
     height: 100%;
-    background-color: #39ff14;
+    background: linear-gradient(to right, #39ff14, #00c6ff); /* Gradient from green to blue */
     width: 0%; /* 初始值為0，由 JS 控制 */
     transition: width 0.5s ease;
+    box-shadow: 0 0 8px rgba(57, 255, 20, 0.7); /* Subtle glow */
 }
 
 /* 調整整體字體大小 */
@@ -328,6 +363,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border: 2px solid #ffd700; /* Yellow border */
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.7); /* Yellow glow */
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 /* 使徒來襲警告樣式 */
@@ -544,6 +582,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 2px solid #00c6ff; /* Blue border */
+    box-shadow: 0 0 10px rgba(0, 198, 255, 0.7); /* Blue glow */
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .circuit-board {
@@ -556,20 +597,24 @@ body {
 
 .node {
     position: absolute;
-    width: 15%; /* Responsive size */
-    height: 15%; /* Responsive size */
+    width: 15%;
+    height: 15%;
     border: 2px solid #00c6ff;
+    background-color: rgba(0, 198, 255, 0.1); /* Subtle blue background */
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 0.8rem;
     box-sizing: border-box;
+    border-radius: 50%; /* Make nodes circular */
+    box-shadow: 0 0 5px rgba(0, 198, 255, 0.5); /* Subtle blue glow */
 }
 
 .node.active {
     background-color: #ff3366;
     border-color: #ff3366;
     color: #fff;
+    box-shadow: 0 0 15px #ff3366, 0 0 25px rgba(255, 51, 102, 0.7); /* More intense red glow */
 }
 
 /* Lines will need dynamic positioning or simplified static lines */
