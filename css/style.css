@@ -9,7 +9,7 @@ body {
     background-color: #000;
     color: #ffd700; /* 黃色 */
     font-family: 'Courier New', Courier, monospace;
-    overflow: hidden; /* 防止滾動條出現 */
+    /* overflow: hidden; /* 防止滾動條出現 */ */
     position: relative;
     /* 螢幕掃描線效果 */
 }
@@ -35,7 +35,7 @@ body::after {
 .dashboard-container {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 0.6fr;
+    grid-template-rows: 1fr 1fr 1fr;
     gap: 10px;
     padding: 10px;
     height: 100%; /* 改為百分比高度 */
@@ -261,7 +261,7 @@ canvas#evaCanvas { /* Specific ID for the new canvas */
     border: 3px solid #ffd700; /* Thicker yellow border */
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.7); /* Yellow glow */
     padding: 15px;
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -307,7 +307,7 @@ body {
 
 /* 讓最重要的資訊更顯眼 */
 .sync-rate {
-    font-size: 12rem; /* 讓同步率數字更大 */
+    font-size: 8rem; /* 讓同步率數字更大 */
     line-height: 1; /* 調整行高，讓數字更緊湊 */
 }
 
@@ -515,7 +515,7 @@ body {
     flex-direction: column;
     /* The panel itself is already styled by .panel */
     /* Ensure content fills the panel */
-    height: 100%;
+    aspect-ratio: 1 / 1; /* Make it square */
     box-sizing: border-box; /* Include padding in height */
 }
 
