@@ -68,16 +68,22 @@ body::after {
 }
 
 /* 色差效果 */
-h4, .sync-rate {
+h4 {
     color: #39ff14;
     text-shadow:
         -1px 0px 2px #ff00de,
         1px 0px 2px #00ff66;
 }
 
+.sync-rate {
+    color: #ffd700; /* 將同步率數據改為黃色 */
+    text-shadow: 0 0 10px #ffd700; /* 同步率數據的黃色光暈 */
+}
+
 .main-display h4 {
     color: #ffd700;
     text-shadow: 0 0 5px #ffd700;
+    font-size: 1.5rem; /* 與其他數據字體大小對齊 */
 }
 
 /* 核心數據 */
@@ -137,7 +143,9 @@ h4, .sync-rate {
 }
 
 #heartbeat-chart {
-    /* Chart.js 會自動調整大小以填滿容器 */
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 /* 右側資料面板容器 */
@@ -163,8 +171,9 @@ h4, .sync-rate {
 }
 
 .radar-circle {
-    width: 80%;
-    padding-bottom: 80%;
+    height: 80%; /* 根據高度計算尺寸 */
+    aspect-ratio: 1 / 1; /* 保持 1:1 的長寬比 */
+    width: auto;
     border-radius: 50%;
     border: 1px solid #39ff14;
     position: relative;
