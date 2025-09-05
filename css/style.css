@@ -364,3 +364,58 @@ body {
     0%, 100% { opacity: 0; }
     20%, 80% { opacity: 1; }
 }
+
+/* RWD for mobile devices */
+@media (max-width: 768px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        height: auto; /* Allow container to grow */
+        padding: 5px;
+    }
+
+    /* Reset grid positions for all direct children of the container */
+    .dashboard-container > * {
+        grid-column: 1 / -1 !important;
+        grid-row: auto !important;
+    }
+
+    .main-display {
+        padding-top: 2rem;
+    }
+
+    .sync-rate {
+        font-size: 6rem;
+    }
+
+    .chart-panel {
+        min-height: 250px; /* Give chart a minimum height */
+    }
+
+    .data-panels {
+        flex-direction: row; /* Arrange side-by-side */
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .data-panels .panel {
+        flex-basis: calc(50% - 5px); /* Two panels per row */
+        min-height: 120px;
+    }
+    
+    .radar-map-panel {
+        min-height: 250px;
+    }
+
+    .log-panel {
+        min-height: 150px;
+    }
+
+    .angel-warning-text {
+        font-size: 8rem;
+    }
+
+    .angel-warning-subtext {
+        font-size: 3rem;
+    }
+}
