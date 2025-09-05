@@ -143,23 +143,24 @@ document.addEventListener('DOMContentLoaded', () => {
         updateRadar() {
             this.elements.radarCircle.querySelectorAll('.target').forEach(t => t.remove());
 
-            if (Math.random() < 0.2) { // 20% 的機率觸發
+            const numTargets = Math.floor(Math.random() * 4); // 先決定紅點數量
+
+            if (numTargets > 0) { // 如果有紅點，則觸發警告並生成紅點
                 this.updateLog("WARNING: ANGEL SIGNATURE DETECTED!");
                 this.elements.warningOverlay.classList.add('visible');
                 setTimeout(() => {
                     this.elements.warningOverlay.classList.remove('visible');
                 }, 3000);
-            }
 
-            const numTargets = Math.floor(Math.random() * 4);
-            for (let i = 0; i < numTargets; i++) {
-                const target = document.createElement('div');
-                target.classList.add('target');
-                const angle = Math.random() * 2 * Math.PI;
-                const radius = Math.random() * 40 + 5;
-                target.style.left = `${50 + radius * Math.cos(angle)}%`;
-                target.style.top = `${50 + radius * Math.sin(angle)}%`;
-                this.elements.radarCircle.appendChild(target);
+                for (let i = 0; i < numTargets; i++) {
+                    const target = document.createElement('div');
+                    target.classList.add('target');
+                    const angle = Math.random() * 2 * Math.PI;
+                    const radius = Math.random() * 40 + 5;
+                    target.style.left = `${50 + radius * Math.cos(angle)}%`;
+                    target.style.top = `${50 + radius * Math.sin(angle)}%`;
+                    this.elements.radarCircle.appendChild(target);
+                }
             }
         },
 
